@@ -1,0 +1,25 @@
+{% extends 'library/base.html' %}
+
+{% block title %}Borrow Book{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card mx-auto" style="max-width: 500px;">
+        <div class="card-body text-center">
+            <h3 class="card-title">Borrow Book</h3>
+            <p class="card-text"><strong>Title:</strong> {{ book.title }}</p>
+            <p class="card-text"><strong>Author:</strong> {{ book.author }}</p>
+            <p class="card-text"><strong>Stock:</strong> {{ book.stock }}</p>
+            <form method="POST" class="mt-4">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                    <label for="id_duedate" class="form-label"><strong>Set a Return Date:</strong></label>
+                    {{ form.duedate }}
+                </div>
+                <button type="submit" class="btn btn-success w-100">Confirm Borrow</button>
+            </form>
+            <a href="{% url 'book_list' %}" class="btn btn-secondary mt-3 w-100">Back to Book List</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'library/base.html' %}
+
+{% block title %}Library Branches{% endblock %}
+
+{% block content %}
+<h2 class="my-4">Library Branches</h2>
+<div class="row">
+    {% for branch in branches %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ branch.name }}</h5>
+                <p class="card-text"><strong>Location:</strong> {{ branch.location }}</p>
+                <p class="card-text"><strong>Phone:</strong> {{ branch.phone }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

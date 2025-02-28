@@ -1,0 +1,52 @@
+{% extends 'library/base.html' %}
+
+{% block title %}Borrowed Books{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">My Borrowed Books</h2>
+    {% if borrowed_books %}
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Borrow Date</th>
+                <th>Due Date</th>
+                <th>Fine</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for borrow in borrowed_books %}
+            <tr class="{% if borrow.duedate < today %}table-danger{% else %}table-success{% endif %}">
+                <td>{{ borrow.bookid.title }}</td>
+                <td>{{ borrow.bookid.author }}</td>
+                <td>{{ borrow.borrowdate }}</td>
+                <td>
+                    {{ borrow.duedate }}
+                    {% if borrow.duedate < today %}
+                        <span class="text-danger">(Overdue)</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if borrow.fineamount > 0 %}
+                        <span class="text-danger">${{ borrow.fineamount }}</span>
+                    {% else %}
+                        <span class="text-success">No fine</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'return_book' borrow.bookid.bookid %}" class="btn btn-danger btn-sm">Return</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info text-center" role="alert">
+        You have no borrowed books at the moment.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
