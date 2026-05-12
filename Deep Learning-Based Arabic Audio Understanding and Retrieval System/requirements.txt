@@ -1,0 +1,17 @@
+numpy
+pandas
+librosa
+soundfile
+datasets
+gc
+torch
+transformers
+tqdm
+evaluate
+re
+unicodedata
+rouge
+sentence_transformers
+faiss
+matplotlib
+pathlib
